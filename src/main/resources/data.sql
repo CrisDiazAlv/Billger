@@ -1,0 +1,7 @@
+INSERT INTO CATEGORY (ID, NAME, COLOR) VALUES
+    (1, 'ROPA', 'AZUL'),
+    (2, 'AMAZON', 'AMARILLO'),
+    (3, 'COMIDA', 'MORADO'),
+    (4, 'GASOLINA', 'NEGRO'),
+    (5, 'FACTURAS', 'ROJO'),
+    (6, 'AHORRO', 'VERDE');
