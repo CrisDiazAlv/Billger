@@ -1,5 +1,7 @@
 package com.github.crisdiazalv.billger.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Account {
 
     @Id
@@ -19,7 +22,7 @@ public class Account {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.LAZY)
     private List<Bill> bills;
 
 }
