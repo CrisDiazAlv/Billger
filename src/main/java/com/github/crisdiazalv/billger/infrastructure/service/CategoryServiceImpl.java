@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
+    private final CategoryRepository repository;
+
     @Autowired
-    private CategoryRepository repository;
+    public CategoryServiceImpl(CategoryRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Category> findAll() {

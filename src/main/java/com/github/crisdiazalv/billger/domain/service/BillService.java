@@ -13,4 +13,7 @@ public interface BillService {
 
     void save(Bill bill);
 
+    Bill findById(long id);
+
+    void deleteById(long id);
 }

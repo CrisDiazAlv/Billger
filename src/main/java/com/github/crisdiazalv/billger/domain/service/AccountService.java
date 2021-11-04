@@ -9,5 +9,6 @@ public interface AccountService {
 
     void save(Account account);
 
+    Account findById(long id);
 }
 
