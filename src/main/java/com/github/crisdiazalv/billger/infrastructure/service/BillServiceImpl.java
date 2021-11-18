@@ -13,8 +13,11 @@ import com.github.crisdiazalv.billger.infrastructure.repository.CategoryReposito
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BillServiceImpl implements BillService {
@@ -34,6 +37,13 @@ public class BillServiceImpl implements BillService {
     @Override
     public List<Bill> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Map<LocalDate, List<Bill>> findAllGroupedByDate() {
+        List<Bill> bills = findAll();
+        // Coger todas las facturas y agruparlas por fecha
+        return bills.stream().collect(Collectors.groupingBy(bill -> bill.getDate().toLocalDate()));
     }
 
     @Override

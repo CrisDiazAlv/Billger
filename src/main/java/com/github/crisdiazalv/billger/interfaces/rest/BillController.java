@@ -1,14 +1,19 @@
 package com.github.crisdiazalv.billger.interfaces.rest;
 
+import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.service.BillService;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.BillDTO;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.GroupedBillDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.mapper.BillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -34,6 +39,15 @@ public class BillController {
     public ResponseEntity<List<BillDTO>> findAll() {
         List<BillDTO> bills = mapper.toDTOList(service.findAll());
         return ResponseEntity.status(HttpStatus.OK).body(bills);
+    }
+
+    @GetMapping("/grouped")
+    public ResponseEntity<List<GroupedBillDTO>> findAllGroupedByDate() {
+        List<GroupedBillDTO> groupedBills = new ArrayList<>();
+        for (Map.Entry<LocalDate, List<Bill>> gb : service.findAllGroupedByDate().entrySet()) {
+            groupedBills.add(new GroupedBillDTO(gb.getKey(), mapper.toDTOList(gb.getValue())));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(groupedBills);
     }
 
     @GetMapping("/{id}")
