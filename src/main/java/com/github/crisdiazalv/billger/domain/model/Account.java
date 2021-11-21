@@ -1,17 +1,15 @@
 package com.github.crisdiazalv.billger.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Account {
 
     @Id
@@ -19,6 +17,12 @@ public class Account {
     private long id;
     private long currentBalance;
     private long estimatedBalance;
+
+    private String name;
+    private String accountNumber;
+    private String identityDocument;
+    private LocalDate birthday;
+    private String email;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
