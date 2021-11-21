@@ -53,6 +53,8 @@ public class BillServiceImpl implements BillService {
         if (account.isEmpty()) {
             throw new AccountNotFoundException("La cuenta no existe");
         }
+        account.get().setCurrentBalance(account.get().getCurrentBalance()+bill.getAmount());
+        accountRepository.save(account.get());
         bill.setAccount(account.get());
 
         Optional<Category> category = categoryRepository.findById(bill.getCategory().getId()); // Devuelve la categoria con un id
