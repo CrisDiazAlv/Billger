@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public interface BillService {
 
-    List<Bill> findAll();
+    List<Bill> findAll(Long category,Boolean paid);
 
     Map<LocalDate,List<Bill>> findAllGroupedByDate();
 

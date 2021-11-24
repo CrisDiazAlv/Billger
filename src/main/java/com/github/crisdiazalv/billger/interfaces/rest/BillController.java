@@ -36,8 +36,9 @@ public class BillController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BillDTO>> findAll() {
-        List<BillDTO> bills = mapper.toDTOList(service.findAll());
+    public ResponseEntity<List<BillDTO>> findAll(@RequestParam(value = "category", required = false) Long category,
+                                                 @RequestParam(value = "paid", required = false) Boolean paid) {
+        List<BillDTO> bills = mapper.toDTOList(service.findAll(category, paid));
         return ResponseEntity.status(HttpStatus.OK).body(bills);
     }
 

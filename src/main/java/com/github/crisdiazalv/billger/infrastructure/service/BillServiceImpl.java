@@ -35,13 +35,28 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public List<Bill> findAll() {
+    public List<Bill> findAll(Long category, Boolean paid) {
+        if (category != null) {
+            Optional<Category> categoryOptional = categoryRepository.findById(category);
+            if (categoryOptional.isEmpty()) {
+                throw new CategoryNotFoundException("La categoría no existe");
+            }
+            return repository.findByCategory(categoryOptional.get());
+        }
+
+
+        if (paid != null) {
+            // Filtra los recibos por pagados y los devuelve en una lista
+            return repository.findAll().stream().filter(bill -> bill.isPaid() == paid).toList();
+        }
+
+
         return repository.findAll();
     }
 
     @Override
     public Map<LocalDate, List<Bill>> findAllGroupedByDate() {
-        List<Bill> bills = findAll();
+        List<Bill> bills = repository.findAll();
         // Coger todas las facturas y agruparlas por fecha
         return bills.stream().collect(Collectors.groupingBy(bill -> bill.getDate().toLocalDate()));
     }
@@ -53,7 +68,7 @@ public class BillServiceImpl implements BillService {
         if (account.isEmpty()) {
             throw new AccountNotFoundException("La cuenta no existe");
         }
-        account.get().setCurrentBalance(account.get().getCurrentBalance()+bill.getAmount());
+        account.get().setCurrentBalance(account.get().getCurrentBalance() + bill.getAmount());
         accountRepository.save(account.get());
         bill.setAccount(account.get());
 
