@@ -19,6 +19,9 @@ public class Bill {
     private boolean paid;
     private LocalDateTime estimatedDate;
 
+    private String description;
+    private String note;
+
     @OneToOne
     private Category category;
 

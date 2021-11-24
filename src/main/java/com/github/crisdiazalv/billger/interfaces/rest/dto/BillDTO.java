@@ -13,6 +13,10 @@ public class BillDTO {
     private boolean paid;
     private LocalDateTime estimatedDate;
 
+
+    private String description;
+    private String note;
+
     private CategoryDTO category;
     private long account;
 
