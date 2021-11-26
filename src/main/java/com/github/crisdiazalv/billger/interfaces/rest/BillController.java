@@ -1,9 +1,11 @@
 package com.github.crisdiazalv.billger.interfaces.rest;
 
 import com.github.crisdiazalv.billger.domain.model.Bill;
+import com.github.crisdiazalv.billger.domain.model.Category;
 import com.github.crisdiazalv.billger.domain.service.BillService;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.BillDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.GroupedBillDTO;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.GroupedByCategoryBillDTO;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.GroupedByDateBillDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.mapper.BillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,14 +44,25 @@ public class BillController {
         return ResponseEntity.status(HttpStatus.OK).body(bills);
     }
 
-    @GetMapping("/grouped")
-    public ResponseEntity<List<GroupedBillDTO>> findAllGroupedByDate() {
-        List<GroupedBillDTO> groupedBills = new ArrayList<>();
+    @GetMapping("/groupedByDate")
+    public ResponseEntity<List<GroupedByDateBillDTO>> findAllGroupedByDate() {
+        List<GroupedByDateBillDTO> groupedBills = new ArrayList<>();
         for (Map.Entry<LocalDate, List<Bill>> gb : service.findAllGroupedByDate().entrySet()) {
-            groupedBills.add(new GroupedBillDTO(gb.getKey(), mapper.toDTOList(gb.getValue())));
+            groupedBills.add(new GroupedByDateBillDTO(gb.getKey(), mapper.toDTOList(gb.getValue())));
         }
         return ResponseEntity.status(HttpStatus.OK).body(groupedBills);
     }
+
+    @GetMapping("/groupedByCategory")
+    public ResponseEntity<List<GroupedByCategoryBillDTO>> findAllGroupedByCategory() {
+        List<GroupedByCategoryBillDTO> groupedBills = new ArrayList<>();
+        for (Map.Entry<Category, List<Bill>> gb : service.findAllGroupedByCategory().entrySet()) {
+            long sum = gb.getValue().stream().map(Bill::getAmount).mapToLong(Long::valueOf).sum();
+            groupedBills.add(new GroupedByCategoryBillDTO(gb.getKey(), mapper.toDTOList(gb.getValue()), sum));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(groupedBills);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<BillDTO> findById(@PathVariable long id) {

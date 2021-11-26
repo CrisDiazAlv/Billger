@@ -1,5 +1,6 @@
 package com.github.crisdiazalv.billger.interfaces.rest.dto;
 
+import com.github.crisdiazalv.billger.domain.model.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,8 +9,9 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class GroupedBillDTO {
+public class GroupedByCategoryBillDTO {
 
-    private LocalDate date;
+    private Category category;
     private List<BillDTO> bills;
+    private long total;
 }

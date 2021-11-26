@@ -62,6 +62,13 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
+    public Map<Category, List<Bill>> findAllGroupedByCategory() {
+        List<Bill> bills = repository.findAll();
+        // Coger todas las facturas y agruparlas por categoria
+        return bills.stream().collect(Collectors.groupingBy(Bill::getCategory));
+    }
+
+    @Override
     public void save(Bill bill) {
 
         Optional<Account> account = accountRepository.findById(bill.getAccount().getId());
