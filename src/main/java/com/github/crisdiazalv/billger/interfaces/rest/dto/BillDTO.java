@@ -12,11 +12,8 @@ public class BillDTO {
     private LocalDateTime date;
     private boolean paid;
     private LocalDateTime estimatedDate;
-
-
     private String description;
-    private String note;
-
+    private String notes;
     private CategoryDTO category;
     private long account;
 

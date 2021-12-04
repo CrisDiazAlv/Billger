@@ -17,5 +17,4 @@ public class Category {
     private String color;
     private String description;
 
-
 }

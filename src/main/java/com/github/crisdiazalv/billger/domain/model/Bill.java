@@ -20,7 +20,7 @@ public class Bill {
     private LocalDateTime estimatedDate;
 
     private String description;
-    private String note;
+    private String notes;
 
     @OneToOne
     private Category category;
