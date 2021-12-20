@@ -31,7 +31,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/user/signup").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and().cors();
     }
 
     @Bean
