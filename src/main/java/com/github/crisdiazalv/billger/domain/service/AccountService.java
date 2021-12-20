@@ -2,13 +2,11 @@ package com.github.crisdiazalv.billger.domain.service;
 
 import com.github.crisdiazalv.billger.domain.model.Account;
 
-/**
- * Spring al compilar busca las etiquetas Service
- */
+import java.util.List;
+
 public interface AccountService {
 
     void save(Account account);
 
     Account findById(long id);
 }
-

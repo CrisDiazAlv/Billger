@@ -1,14 +1,12 @@
 package com.github.crisdiazalv.billger.infrastructure.service;
 
-import com.github.crisdiazalv.billger.domain.exception.UserNotFoundException;
+import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import com.github.crisdiazalv.billger.domain.model.User;
 import com.github.crisdiazalv.billger.domain.service.UserService;
 import com.github.crisdiazalv.billger.infrastructure.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,11 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findMe(String username) {
-        Optional<User> user = repository.findByUsername(username);
-        if (user.isEmpty()) {
-            throw new UserNotFoundException("El usuario no existe");
-        }
-        return user.get();
+        return repository.findByUsername(username).orElseThrow(() -> new NotFoundException("El usuario no existe"));
     }
 
 }

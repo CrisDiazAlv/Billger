@@ -1,8 +1,6 @@
 package com.github.crisdiazalv.billger.infrastructure.service;
 
-import com.github.crisdiazalv.billger.domain.exception.AccountNotFoundException;
-import com.github.crisdiazalv.billger.domain.exception.BillNotFoundException;
-import com.github.crisdiazalv.billger.domain.exception.CategoryNotFoundException;
+import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import com.github.crisdiazalv.billger.domain.model.Account;
 import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.model.Category;
@@ -22,7 +20,6 @@ import java.util.stream.Collectors;
 @Service
 public class BillServiceImpl implements BillService {
 
-
     private final BillRepository repository;
     private final CategoryRepository categoryRepository;
     private final AccountRepository accountRepository;
@@ -39,7 +36,7 @@ public class BillServiceImpl implements BillService {
         if (category != null) {
             Optional<Category> categoryOptional = categoryRepository.findById(category);
             if (categoryOptional.isEmpty()) {
-                throw new CategoryNotFoundException("La categoría no existe");
+                throw new NotFoundException("La categoría no existe");
             }
             return repository.findByCategory(categoryOptional.get());
         }
@@ -73,7 +70,7 @@ public class BillServiceImpl implements BillService {
 
         Optional<Account> account = accountRepository.findById(bill.getAccount().getId());
         if (account.isEmpty()) {
-            throw new AccountNotFoundException("La cuenta no existe");
+            throw new NotFoundException("La cuenta no existe");
         }
         account.get().setCurrentBalance(account.get().getCurrentBalance() + bill.getAmount());
         accountRepository.save(account.get());
@@ -81,7 +78,7 @@ public class BillServiceImpl implements BillService {
 
         Optional<Category> category = categoryRepository.findById(bill.getCategory().getId()); // Devuelve la categoria con un id
         if (category.isEmpty()) {
-            throw new CategoryNotFoundException("La categoría no existe");
+            throw new NotFoundException("La categoría no existe");
         }
         bill.setCategory(category.get());
         repository.save(bill);
@@ -89,11 +86,7 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public Bill findById(long id) {
-        Optional<Bill> bill = repository.findById(id);
-        if (bill.isEmpty()) {
-            throw new BillNotFoundException("El recibo no existe");
-        }
-        return bill.get();
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("El recibo no existe"));
     }
 
     @Override
@@ -101,6 +94,5 @@ public class BillServiceImpl implements BillService {
         Bill bill = findById(id);
         repository.delete(bill);
     }
-
 
 }

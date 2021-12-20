@@ -31,12 +31,6 @@ public class BillController {
         this.mapper = mapper;
     }
 
-    @PostMapping
-    public ResponseEntity<Void> save(@RequestBody BillDTO bill) {
-        service.save(mapper.toBill(bill));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
     @GetMapping
     public ResponseEntity<List<BillDTO>> findAll(@RequestParam(value = "category", required = false) Long category,
                                                  @RequestParam(value = "paid", required = false) Boolean paid) {
@@ -63,11 +57,16 @@ public class BillController {
         return ResponseEntity.status(HttpStatus.OK).body(groupedBills);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<BillDTO> findById(@PathVariable long id) {
         BillDTO bill = mapper.toBillDTO(service.findById(id));
         return ResponseEntity.status(HttpStatus.OK).body(bill);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> save(@RequestBody BillDTO bill) {
+        service.save(mapper.toBill(bill));
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("/{id}")
