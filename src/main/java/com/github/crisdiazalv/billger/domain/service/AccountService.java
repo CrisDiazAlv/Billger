@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface AccountService {
 
-    void save(Account account);
+    List<Account> findAll();
 
     Account findById(long id);
 
-    List<Account> findAll();
+    void save(Account account);
 
 }
