@@ -2,6 +2,7 @@ package com.github.crisdiazalv.billger.interfaces.rest.mapper;
 
 import com.github.crisdiazalv.billger.domain.model.Account;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.AccountDTO;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.AccountInfoDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.NewAccountDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,7 +19,10 @@ public interface AccountMapper {
     Account toAccount(AccountDTO accountDTO);
 
     @Mapping(source = "initialBalance", target = "currentBalance")
-    Account toAccount(NewAccountDTO accountDTO);
+    Account toAccount(NewAccountDTO newAccountDTO);
+
+    @Mapping(source = "user.id", target = "user")
+    AccountInfoDTO toAccountInfoDTO(Account account);
 
     List<AccountDTO> toDTOList(List<Account> accounts);
 

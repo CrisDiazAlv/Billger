@@ -14,6 +14,6 @@ public class UserDTO {
     private String identityDocument;
     private LocalDate birthday;
     private String email;
-    private List<AccountDTO> accounts;
+    private List<AccountInfoDTO> accounts;
 
 }
