@@ -4,8 +4,9 @@ import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.model.Category;
 import com.github.crisdiazalv.billger.domain.service.BillService;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.BillDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.GroupedByCategoryBillDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.GroupedByDateBillDTO;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.BillsGroupedByDateDTO;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.CategoryWithBillsDTO;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.NewBillDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.mapper.BillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,20 +48,20 @@ public class BillController {
     }
 
     @GetMapping("/groupedByDate")
-    public ResponseEntity<List<GroupedByDateBillDTO>> findAllGroupedByDate() {
-        List<GroupedByDateBillDTO> groupedBills = new ArrayList<>();
+    public ResponseEntity<List<BillsGroupedByDateDTO>> findAllGroupedByDate() {
+        List<BillsGroupedByDateDTO> groupedBills = new ArrayList<>();
         for (Map.Entry<LocalDate, List<Bill>> gb : service.findAllGroupedByDate().entrySet()) {
-            groupedBills.add(new GroupedByDateBillDTO(gb.getKey(), mapper.toDTOList(gb.getValue())));
+            groupedBills.add(new BillsGroupedByDateDTO(gb.getKey(), mapper.toDTOList(gb.getValue())));
         }
         return ResponseEntity.ok(groupedBills);
     }
 
     @GetMapping("/groupedByCategory")
-    public ResponseEntity<List<GroupedByCategoryBillDTO>> findAllGroupedByCategory() {
-        List<GroupedByCategoryBillDTO> groupedBills = new ArrayList<>();
+    public ResponseEntity<List<CategoryWithBillsDTO>> findAllGroupedByCategory() {
+        List<CategoryWithBillsDTO> groupedBills = new ArrayList<>();
         for (Map.Entry<Category, List<Bill>> gb : service.findAllGroupedByCategory().entrySet()) {
             long sum = gb.getValue().stream().map(Bill::getAmount).mapToLong(Long::valueOf).sum();
-            groupedBills.add(new GroupedByCategoryBillDTO(gb.getKey(), mapper.toDTOList(gb.getValue()), sum));
+            groupedBills.add(new CategoryWithBillsDTO(gb.getKey(), mapper.toDTOList(gb.getValue()), sum));
         }
         return ResponseEntity.ok(groupedBills);
     }
@@ -72,7 +73,7 @@ public class BillController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody BillDTO bill) {
+    public ResponseEntity<Void> save(@RequestBody NewBillDTO bill) {
         service.save(mapper.toBill(bill));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

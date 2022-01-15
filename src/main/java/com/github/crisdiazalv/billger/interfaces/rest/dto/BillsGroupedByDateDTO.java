@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class GroupedByDateBillDTO {
+public class BillsGroupedByDateDTO {
 
     private LocalDate date;
     private List<BillDTO> bills;

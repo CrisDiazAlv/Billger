@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class GroupedByCategoryBillDTO {
+public class CategoryWithBillsDTO {
 
     private Category category;
     private List<BillDTO> bills;
