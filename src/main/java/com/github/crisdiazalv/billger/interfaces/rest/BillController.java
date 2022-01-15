@@ -10,7 +10,15 @@ import com.github.crisdiazalv.billger.interfaces.rest.mapper.BillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,7 +43,7 @@ public class BillController {
     public ResponseEntity<List<BillDTO>> findAll(@RequestParam(value = "category", required = false) Long category,
                                                  @RequestParam(value = "paid", required = false) Boolean paid) {
         List<BillDTO> bills = mapper.toDTOList(service.findAll(category, paid));
-        return ResponseEntity.status(HttpStatus.OK).body(bills);
+        return ResponseEntity.ok(bills);
     }
 
     @GetMapping("/groupedByDate")
@@ -44,7 +52,7 @@ public class BillController {
         for (Map.Entry<LocalDate, List<Bill>> gb : service.findAllGroupedByDate().entrySet()) {
             groupedBills.add(new GroupedByDateBillDTO(gb.getKey(), mapper.toDTOList(gb.getValue())));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(groupedBills);
+        return ResponseEntity.ok(groupedBills);
     }
 
     @GetMapping("/groupedByCategory")
@@ -54,13 +62,13 @@ public class BillController {
             long sum = gb.getValue().stream().map(Bill::getAmount).mapToLong(Long::valueOf).sum();
             groupedBills.add(new GroupedByCategoryBillDTO(gb.getKey(), mapper.toDTOList(gb.getValue()), sum));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(groupedBills);
+        return ResponseEntity.ok(groupedBills);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<BillDTO> findById(@PathVariable long id) {
         BillDTO bill = mapper.toBillDTO(service.findById(id));
-        return ResponseEntity.status(HttpStatus.OK).body(bill);
+        return ResponseEntity.ok(bill);
     }
 
     @PostMapping

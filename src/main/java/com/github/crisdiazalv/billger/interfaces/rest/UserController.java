@@ -7,7 +7,12 @@ import com.github.crisdiazalv.billger.interfaces.rest.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
@@ -34,7 +39,7 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<UserDTO> findMe(Principal principal) {
         UserDTO user = mapper.toUserDTO(service.findMe(principal.getName()));
-        return ResponseEntity.status(HttpStatus.OK).body(user);
+        return ResponseEntity.ok(user);
     }
 
 }

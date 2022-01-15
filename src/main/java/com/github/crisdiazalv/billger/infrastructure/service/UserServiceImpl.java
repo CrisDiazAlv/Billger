@@ -28,7 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findMe(String username) {
-        return repository.findByUsername(username).orElseThrow(() -> new NotFoundException("El usuario no existe"));
+        log.info("Searching for user '{}'", username);
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("El usuario no existe"));
     }
 
 }

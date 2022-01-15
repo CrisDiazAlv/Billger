@@ -10,5 +10,4 @@ public class CategoryDTO {
     private String color;
     private String description;
 
-
 }

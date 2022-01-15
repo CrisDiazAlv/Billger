@@ -24,7 +24,21 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category findById(long id) {
+        User user = getUser();
+        return user.getCategories()
+                .stream()
+                .filter(c -> c.getId() == id)
+                .findAny()
+                .orElseThrow(() -> new NotFoundException("La categoria no existe"));
+    }
+
+    @Transactional
+    @Override
     public void save(Category category) {
+        User user = getUser();
+        category.setUser(user);
+        log.info("Saving new category {}", category);
         repository.save(category);
     }
 
