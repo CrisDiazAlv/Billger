@@ -1,13 +1,20 @@
 package com.github.crisdiazalv.billger.infrastructure.service;
 
+import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import com.github.crisdiazalv.billger.domain.model.Category;
+import com.github.crisdiazalv.billger.domain.model.User;
+import com.github.crisdiazalv.billger.domain.model.UserPrincipal;
 import com.github.crisdiazalv.billger.domain.service.CategoryService;
 import com.github.crisdiazalv.billger.infrastructure.repository.CategoryRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -23,6 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Category findById(long id) {
         User user = getUser();
@@ -40,6 +48,21 @@ public class CategoryServiceImpl implements CategoryService {
         category.setUser(user);
         log.info("Saving new category {}", category);
         repository.save(category);
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(long id) {
+        Category category = findById(id);
+        log.info("Deleting account '{}'", category.getName());
+        repository.delete(category);
+    }
+
+    private User getUser() {
+        return ((UserPrincipal) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal())
+                .getUser();
     }
 
 }

@@ -61,6 +61,14 @@ public class AccountServiceImpl implements AccountService {
         //repository.save(account);
     }
 
+    @Transactional
+    @Override
+    public void deleteById(long id) {
+        Account account = findById(id);
+        log.info("Deleting account '{}'", account.getName());
+        repository.delete(account);
+    }
+
     private User getUser() {
         return ((UserPrincipal) SecurityContextHolder.getContext()
                 .getAuthentication()

@@ -12,4 +12,6 @@ public interface AccountService {
 
     void save(Account account);
 
+    void deleteById(long id);
+
 }
