@@ -6,6 +6,7 @@ import com.github.crisdiazalv.billger.domain.model.User;
 import com.github.crisdiazalv.billger.domain.model.UserPrincipal;
 import com.github.crisdiazalv.billger.domain.service.CategoryService;
 import com.github.crisdiazalv.billger.infrastructure.repository.CategoryRepository;
+import com.github.crisdiazalv.billger.infrastructure.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,21 +20,29 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository repository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public CategoryServiceImpl(CategoryRepository repository) {
+    public CategoryServiceImpl(CategoryRepository repository, UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Category> findAll() {
-        return repository.findAll();
+        User user = userRepository.findByUsername(getUser().getUsername())
+                .orElseThrow(() -> new NotFoundException("El usuario no existe"));
+        user.getCategories()
+                .forEach(c -> log.info("Found {} categories for user '{}'", user.getCategories().size(), user.getName()));
+        return user.getCategories();
     }
 
     @Transactional(readOnly = true)
     @Override
     public Category findById(long id) {
-        User user = getUser();
+        User user = userRepository.findByUsername(getUser().getUsername())
+                .orElseThrow(() -> new NotFoundException("El usuario no existe"));
         return user.getCategories()
                 .stream()
                 .filter(c -> c.getId() == id)
@@ -46,7 +55,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void save(Category category) {
         User user = getUser();
         category.setUser(user);
-        log.info("Saving new category {}", category);
+        log.info("Saving new category: {}", category);
         repository.save(category);
     }
 
@@ -54,8 +63,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteById(long id) {
         Category category = findById(id);
-        log.info("Deleting account '{}'", category.getName());
-        repository.delete(category);
+        log.info("Deleting category '{}'", category.getName());
+        // first, remove it from the user
+        category.getUser().getCategories().remove(category);
+        // delete it
+        repository.deleteById(id);
     }
 
     private User getUser() {

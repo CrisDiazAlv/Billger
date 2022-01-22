@@ -33,7 +33,9 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Account> findAll() {
         User user = userRepository.findByUsername(getUser().getUsername())
-                .orElseThrow(() -> new NotFoundException("No existe un usuario con ese username"));
+                .orElseThrow(() -> new NotFoundException("El usuario no existe"));
+        user.getAccounts()
+                .forEach(a -> log.info("Found {} bills on '{}' account", a.getBills().size(), a.getName()));
         return user.getAccounts();
     }
 
@@ -41,12 +43,14 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account findById(long id) {
         User user = userRepository.findByUsername(getUser().getUsername())
-                .orElseThrow(() -> new NotFoundException("No existe un usuario con ese username"));
-        return user.getAccounts()
+                .orElseThrow(() -> new NotFoundException("El usuario no existe"));
+        Account account = user.getAccounts()
                 .stream()
                 .filter(a -> a.getId() == id)
                 .findAny()
                 .orElseThrow(() -> new NotFoundException("La cuenta no existe"));
+        log.info("Found {} bills on '{}' account", account.getBills().size(), account.getName());
+        return account;
     }
 
     @Transactional
@@ -55,10 +59,8 @@ public class AccountServiceImpl implements AccountService {
         User user = getUser();
         account.setUser(user);
         account.setCreationDate(LocalDateTime.now());
-        user.getAccounts().add(account);
-        log.info("Saving account {}", account.getName());
-        userRepository.save(user);
-        //repository.save(account);
+        log.info("Saving new account: {}", account);
+        repository.save(account);
     }
 
     @Transactional
@@ -66,7 +68,10 @@ public class AccountServiceImpl implements AccountService {
     public void deleteById(long id) {
         Account account = findById(id);
         log.info("Deleting account '{}'", account.getName());
-        repository.delete(account);
+        // first, remove it from the user
+        account.getUser().getAccounts().remove(account);
+        // delete it
+        repository.deleteById(id);
     }
 
     private User getUser() {
