@@ -12,4 +12,5 @@ public class BillsGroupedByDateDTO {
 
     private LocalDate date;
     private List<BillDTO> bills;
+
 }

@@ -1,6 +1,5 @@
 package com.github.crisdiazalv.billger.interfaces.rest;
 
-
 import com.github.crisdiazalv.billger.domain.service.CategoryService;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.CategoryDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.mapper.CategoryMapper;
@@ -35,7 +34,7 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> findAll() {
         List<CategoryDTO> categories = mapper.toDTOList(service.findAll());
-        return ResponseEntity.status(HttpStatus.OK).body(categories);
+        return ResponseEntity.ok(categories);
     }
 
     @GetMapping("/{id}")

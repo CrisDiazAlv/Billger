@@ -13,4 +13,5 @@ public class CategoryWithBillsDTO {
     private Category category;
     private List<BillDTO> bills;
     private long total;
+
 }

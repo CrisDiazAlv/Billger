@@ -35,7 +35,7 @@ public class AccountController {
     @GetMapping
     public ResponseEntity<List<AccountDTO>> findAll() {
         List<AccountDTO> accounts = mapper.toDTOList(service.findAll());
-        return ResponseEntity.status(HttpStatus.OK).body(accounts);
+        return ResponseEntity.ok(accounts);
     }
 
     @GetMapping("/{id}")
