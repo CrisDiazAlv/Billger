@@ -8,6 +8,7 @@ import com.github.crisdiazalv.billger.interfaces.rest.dto.BillsGroupedByDateDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.CategoryWithBillsDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.NewBillDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.mapper.BillMapper;
+import com.github.crisdiazalv.billger.interfaces.rest.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +34,13 @@ public class BillController {
 
     private final BillService service;
     private final BillMapper mapper;
+    private final CategoryMapper categoryMapper;
 
     @Autowired
-    public BillController(BillService service, BillMapper mapper) {
+    public BillController(BillService service, BillMapper mapper, CategoryMapper categoryMapper) {
         this.service = service;
         this.mapper = mapper;
+        this.categoryMapper = categoryMapper;
     }
 
     @GetMapping
@@ -61,7 +64,7 @@ public class BillController {
         List<CategoryWithBillsDTO> groupedBills = new ArrayList<>();
         for (Map.Entry<Category, List<Bill>> gb : service.findAllGroupedByCategory().entrySet()) {
             long sum = gb.getValue().stream().map(Bill::getAmount).mapToLong(Long::valueOf).sum();
-            groupedBills.add(new CategoryWithBillsDTO(gb.getKey(), mapper.toDTOList(gb.getValue()), sum));
+            groupedBills.add(new CategoryWithBillsDTO(categoryMapper.toCategoryDTO(gb.getKey()), mapper.toDTOList(gb.getValue()), sum));
         }
         return ResponseEntity.ok(groupedBills);
     }
