@@ -44,16 +44,15 @@ public class BillController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BillDTO>> findAll(@RequestParam(value = "category", required = false) Long category,
-                                                 @RequestParam(value = "paid", required = false) Boolean paid) {
-        List<BillDTO> bills = mapper.toDTOList(service.findAll(category, paid));
+    public ResponseEntity<List<BillDTO>> findAll(@RequestParam(value = "category", required = false) Long category) {
+        List<BillDTO> bills = mapper.toDTOList(service.findAll(category));
         return ResponseEntity.ok(bills);
     }
 
     @GetMapping("/groupedByDate")
-    public ResponseEntity<List<BillsGroupedByDateDTO>> findAllGroupedByDate() {
+    public ResponseEntity<List<BillsGroupedByDateDTO>> findAllGroupedByDate(@RequestParam(value = "category", required = false) Long category) {
         List<BillsGroupedByDateDTO> groupedBills = new ArrayList<>();
-        for (Map.Entry<LocalDate, List<Bill>> gb : service.findAllGroupedByDate().entrySet()) {
+        for (Map.Entry<LocalDate, List<Bill>> gb : service.findAllGroupedByDate(category).entrySet()) {
             groupedBills.add(new BillsGroupedByDateDTO(gb.getKey(), mapper.toDTOList(gb.getValue())));
         }
         return ResponseEntity.ok(groupedBills);

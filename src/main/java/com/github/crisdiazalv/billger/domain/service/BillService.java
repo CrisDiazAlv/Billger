@@ -9,15 +9,15 @@ import java.util.Map;
 
 public interface BillService {
 
-    List<Bill> findAll(Long category, Boolean paid);
+    List<Bill> findAll(Long category);
 
-    Map<LocalDate, List<Bill>> findAllGroupedByDate();
+    Bill findById(long id);
+
+    Map<LocalDate, List<Bill>> findAllGroupedByDate(Long category);
 
     Map<Category, List<Bill>> findAllGroupedByCategory();
 
     void save(Bill bill);
-
-    Bill findById(long id);
 
     void deleteById(long id);
 
