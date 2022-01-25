@@ -44,8 +44,8 @@ public class BillController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BillDTO>> findAll(@RequestParam(value = "category", required = false) Long category) {
-        List<BillDTO> bills = mapper.toDTOList(service.findAll(category));
+    public ResponseEntity<List<BillDTO>> findAll(@RequestParam(value = "account") long accountId) {
+        List<BillDTO> bills = mapper.toDTOList(service.findAll(accountId));
         return ResponseEntity.ok(bills);
     }
 
@@ -58,7 +58,7 @@ public class BillController {
         return ResponseEntity.ok(groupedBills);
     }
 
-    @GetMapping("/groupedByCategory")
+    @GetMapping("/group/category")
     public ResponseEntity<List<CategoryWithBillsDTO>> findAllGroupedByCategory() {
         List<CategoryWithBillsDTO> groupedBills = new ArrayList<>();
         for (Map.Entry<Category, List<Bill>> gb : service.findAllGroupedByCategory().entrySet()) {

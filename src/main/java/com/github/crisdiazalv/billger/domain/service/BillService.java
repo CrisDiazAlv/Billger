@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface BillService {
 
-    List<Bill> findAll(Long category);
+    List<Bill> findAll(long account);
 
     Bill findById(long id);
 
