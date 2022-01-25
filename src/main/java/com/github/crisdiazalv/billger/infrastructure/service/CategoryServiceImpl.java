@@ -33,8 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> findAll() {
         User user = userRepository.findByUsername(getUser().getUsername())
                 .orElseThrow(() -> new NotFoundException("El usuario no existe"));
-        user.getCategories()
-                .forEach(c -> log.info("Found {} categories for user '{}'", user.getCategories().size(), user.getName()));
+        log.info("Found {} categories for user '{}'", user.getCategories().size(), user.getName());
         return user.getCategories();
     }
 
