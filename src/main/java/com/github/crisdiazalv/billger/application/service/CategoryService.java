@@ -4,7 +4,6 @@ import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import com.github.crisdiazalv.billger.domain.model.Category;
 import com.github.crisdiazalv.billger.domain.model.User;
 import com.github.crisdiazalv.billger.domain.model.UserPrincipal;
-import com.github.crisdiazalv.billger.domain.service.CategoryService;
 import com.github.crisdiazalv.billger.infrastructure.repository.CategoryRepository;
 import com.github.crisdiazalv.billger.infrastructure.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class CategoryService implements CategoryService {
+public class CategoryService {
 
     private final CategoryRepository repository;
     private final UserRepository userRepository;
@@ -29,7 +28,6 @@ public class CategoryService implements CategoryService {
     }
 
     @Transactional(readOnly = true)
-    @Override
     public List<Category> findAll() {
         User user = userRepository.findByUsername(getUser().getUsername())
                 .orElseThrow(() -> new NotFoundException("El usuario no existe"));
@@ -38,7 +36,6 @@ public class CategoryService implements CategoryService {
     }
 
     @Transactional(readOnly = true)
-    @Override
     public Category findById(long id) {
         User user = userRepository.findByUsername(getUser().getUsername())
                 .orElseThrow(() -> new NotFoundException("El usuario no existe"));
@@ -50,7 +47,6 @@ public class CategoryService implements CategoryService {
     }
 
     @Transactional
-    @Override
     public void save(Category category) {
         User user = getUser();
         category.setUser(user);
@@ -59,7 +55,6 @@ public class CategoryService implements CategoryService {
     }
 
     @Transactional
-    @Override
     public void deleteById(long id) {
         Category category = findById(id);
         log.info("Deleting category '{}'", category.getName());

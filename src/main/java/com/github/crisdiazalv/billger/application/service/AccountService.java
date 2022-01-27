@@ -4,7 +4,6 @@ import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import com.github.crisdiazalv.billger.domain.model.Account;
 import com.github.crisdiazalv.billger.domain.model.User;
 import com.github.crisdiazalv.billger.domain.model.UserPrincipal;
-import com.github.crisdiazalv.billger.domain.service.AccountService;
 import com.github.crisdiazalv.billger.infrastructure.repository.AccountRepository;
 import com.github.crisdiazalv.billger.infrastructure.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class AccountService implements AccountService {
+public class AccountService {
 
     private final AccountRepository repository;
     private final UserRepository userRepository;
@@ -30,7 +29,6 @@ public class AccountService implements AccountService {
     }
 
     @Transactional(readOnly = true)
-    @Override
     public List<Account> findAll() {
         User user = userRepository.findByUsername(getUser().getUsername())
                 .orElseThrow(() -> new NotFoundException("El usuario no existe"));
@@ -40,7 +38,6 @@ public class AccountService implements AccountService {
     }
 
     @Transactional(readOnly = true)
-    @Override
     public Account findById(long id) {
         User user = userRepository.findByUsername(getUser().getUsername())
                 .orElseThrow(() -> new NotFoundException("El usuario no existe"));
@@ -54,7 +51,6 @@ public class AccountService implements AccountService {
     }
 
     @Transactional
-    @Override
     public void save(Account account) {
         User user = getUser();
         account.setUser(user);
@@ -64,7 +60,6 @@ public class AccountService implements AccountService {
     }
 
     @Transactional
-    @Override
     public void deleteById(long id) {
         Account account = findById(id);
         log.info("Deleting account '{}'", account.getName());

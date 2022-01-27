@@ -6,7 +6,6 @@ import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.model.Category;
 import com.github.crisdiazalv.billger.domain.model.User;
 import com.github.crisdiazalv.billger.domain.model.UserPrincipal;
-import com.github.crisdiazalv.billger.domain.service.BillService;
 import com.github.crisdiazalv.billger.infrastructure.repository.BillRepository;
 import com.github.crisdiazalv.billger.infrastructure.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class BillService implements BillService {
+public class BillService {
 
     private final BillRepository repository;
     private final UserRepository userRepository;
@@ -36,7 +35,6 @@ public class BillService implements BillService {
     }
 
     @Transactional(readOnly = true)
-    @Override
     public List<Bill> findAll(long accountId) {
         User user = findUser();
         Account account = findAccountOrThrow(accountId, user.getAccounts());
@@ -58,7 +56,6 @@ public class BillService implements BillService {
     }
 
     @Transactional(readOnly = true)
-    @Override
     public Bill findById(long id) {
         User user = findUser();
         return user.getAccounts()
@@ -70,7 +67,6 @@ public class BillService implements BillService {
     }
 
     @Transactional(readOnly = true)
-    @Override
     public Map<LocalDate, List<Bill>> findAllGroupedByDate(Long category) {
         List<Bill> bills = repository.findAll();
         // coger todas las facturas y agruparlas por fecha
@@ -78,7 +74,6 @@ public class BillService implements BillService {
     }
 
     @Transactional(readOnly = true)
-    @Override
     public Map<Category, List<Bill>> findAllGroupedByCategory() {
         List<Bill> bills = repository.findAll();
         // coger todas las facturas y agruparlas por categoria
@@ -86,7 +81,6 @@ public class BillService implements BillService {
     }
 
     @Transactional
-    @Override
     public void save(Bill bill) {
         User user = findUser();
         // check if the account is property of the user
@@ -102,7 +96,6 @@ public class BillService implements BillService {
     }
 
     @Transactional
-    @Override
     public void deleteById(long id) {
         Bill bill = findById(id);
         log.info("Deleting bill '{}'", bill.getDescription());
