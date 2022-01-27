@@ -1,4 +1,4 @@
-package com.github.crisdiazalv.billger.interfaces.rest.dto.bill;
+package com.github.crisdiazalv.billger.infrastructure.rest.dto.bill;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

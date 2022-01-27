@@ -1,8 +1,8 @@
-package com.github.crisdiazalv.billger.interfaces.rest.mapper;
+package com.github.crisdiazalv.billger.infrastructure.rest.mapper;
 
 import com.github.crisdiazalv.billger.domain.model.User;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.user.NewUserDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.user.UserDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.user.NewUserDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.user.UserDTO;
 import org.mapstruct.Mapper;
 
 

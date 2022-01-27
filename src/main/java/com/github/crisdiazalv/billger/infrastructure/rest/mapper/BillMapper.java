@@ -1,8 +1,8 @@
-package com.github.crisdiazalv.billger.interfaces.rest.mapper;
+package com.github.crisdiazalv.billger.infrastructure.rest.mapper;
 
 import com.github.crisdiazalv.billger.domain.model.Bill;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.BillDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.NewBillDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.BillDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.NewBillDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

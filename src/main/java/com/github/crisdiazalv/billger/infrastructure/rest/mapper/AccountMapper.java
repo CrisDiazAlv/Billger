@@ -1,9 +1,9 @@
-package com.github.crisdiazalv.billger.interfaces.rest.mapper;
+package com.github.crisdiazalv.billger.infrastructure.rest.mapper;
 
 import com.github.crisdiazalv.billger.domain.model.Account;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.account.AccountDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.account.AccountInfoDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.account.NewAccountDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.account.AccountDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.account.AccountInfoDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.account.NewAccountDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -1,4 +1,4 @@
-package com.github.crisdiazalv.billger.interfaces.config;
+package com.github.crisdiazalv.billger.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

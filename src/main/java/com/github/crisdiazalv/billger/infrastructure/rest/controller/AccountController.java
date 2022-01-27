@@ -1,8 +1,9 @@
-package com.github.crisdiazalv.billger.interfaces.rest.controller;
+package com.github.crisdiazalv.billger.infrastructure.rest.controller;
 
-import com.github.crisdiazalv.billger.application.service.CategoryService;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.category.CategoryDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.mapper.CategoryMapper;
+import com.github.crisdiazalv.billger.application.service.AccountService;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.account.AccountDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.account.NewAccountDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.mapper.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,33 +20,33 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/category")
-public class CategoryController {
+@RequestMapping("/account")
+public class AccountController {
 
-    private final CategoryService service;
-    private final CategoryMapper mapper;
+    private final AccountService service;
+    private final AccountMapper mapper;
 
     @Autowired
-    public CategoryController(CategoryService service, CategoryMapper mapper) {
+    public AccountController(AccountService service, AccountMapper mapper) {
         this.service = service;
         this.mapper = mapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> findAll() {
-        List<CategoryDTO> categories = mapper.toDTOList(service.findAll());
-        return ResponseEntity.ok(categories);
+    public ResponseEntity<List<AccountDTO>> findAll() {
+        List<AccountDTO> accounts = mapper.toDTOList(service.findAll());
+        return ResponseEntity.ok(accounts);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryDTO> findById(@PathVariable long id) {
-        CategoryDTO category = mapper.toCategoryDTO(service.findById(id));
-        return ResponseEntity.ok(category);
+    public ResponseEntity<AccountDTO> findById(@PathVariable long id) {
+        AccountDTO account = mapper.toAccountDTO(service.findById(id));
+        return ResponseEntity.ok(account);
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody CategoryDTO category) {
-        service.save(mapper.toCategory(category));
+    public ResponseEntity<Void> save(@RequestBody NewAccountDTO account) {
+        service.save(mapper.toAccount(account));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

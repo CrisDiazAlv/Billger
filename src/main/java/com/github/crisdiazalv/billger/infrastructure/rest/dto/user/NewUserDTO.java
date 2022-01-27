@@ -1,4 +1,4 @@
-package com.github.crisdiazalv.billger.interfaces.rest.dto.user;
+package com.github.crisdiazalv.billger.infrastructure.rest.dto.user;
 
 import lombok.Data;
 

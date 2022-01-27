@@ -1,14 +1,14 @@
-package com.github.crisdiazalv.billger.interfaces.rest.controller;
+package com.github.crisdiazalv.billger.infrastructure.rest.controller;
 
 import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.model.Category;
 import com.github.crisdiazalv.billger.application.service.BillService;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.BillDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.BillsGroupedByDateDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.category.CategoryWithBillsDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.NewBillDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.mapper.BillMapper;
-import com.github.crisdiazalv.billger.interfaces.rest.mapper.CategoryMapper;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.BillDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.BillsGroupedByDateDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.category.CategoryWithBillsDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.NewBillDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.mapper.BillMapper;
+import com.github.crisdiazalv.billger.infrastructure.rest.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

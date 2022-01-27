@@ -1,13 +1,11 @@
-package com.github.crisdiazalv.billger.interfaces.rest.dto.account;
+package com.github.crisdiazalv.billger.infrastructure.rest.dto.account;
 
-import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.BillDTO;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
-public class AccountDTO {
+public class AccountInfoDTO {
 
     private long id;
     private long user;
@@ -15,6 +13,5 @@ public class AccountDTO {
     private String name;
     private String accountNumber;
     private LocalDateTime creationDate;
-    private List<BillDTO> bills;
 
 }

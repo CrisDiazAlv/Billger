@@ -1,7 +1,7 @@
-package com.github.crisdiazalv.billger.interfaces.rest.mapper;
+package com.github.crisdiazalv.billger.infrastructure.rest.mapper;
 
 import com.github.crisdiazalv.billger.domain.model.Category;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.category.CategoryDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.category.CategoryDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.github.crisdiazalv.billger.interfaces.rest.dto.category;
+package com.github.crisdiazalv.billger.infrastructure.rest.dto.category;
 
 import lombok.Data;
 
