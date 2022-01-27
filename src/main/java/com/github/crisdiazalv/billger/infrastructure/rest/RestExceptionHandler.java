@@ -1,4 +1,4 @@
-package com.github.crisdiazalv.billger.infrastructure.rest.util;
+package com.github.crisdiazalv.billger.infrastructure.rest;
 
 import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import org.springframework.http.HttpHeaders;
