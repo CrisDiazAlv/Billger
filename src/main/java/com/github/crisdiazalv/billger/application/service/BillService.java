@@ -74,10 +74,15 @@ public class BillService {
     }
 
     @Transactional(readOnly = true)
-    public Map<Category, List<Bill>> findAllGroupedByCategory() {
-        List<Bill> bills = repository.findAll();
-        // coger todas las facturas y agruparlas por categoria
-        return bills.stream().collect(Collectors.groupingBy(Bill::getCategory));
+    public Map<Category, List<Bill>> findGroupedByCategory(long account) {
+        User user = findUser();
+        List<Bill> bills = user.getAccounts()
+                .stream()
+                .filter(a -> a.getId() == account)
+                .flatMap(a -> a.getBills().stream())
+                .toList();
+        return bills.stream()
+                .collect(Collectors.groupingBy(Bill::getCategory));
     }
 
     @Transactional

@@ -1,12 +1,12 @@
 package com.github.crisdiazalv.billger.infrastructure.rest.controller;
 
+import com.github.crisdiazalv.billger.application.service.BillService;
 import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.model.Category;
-import com.github.crisdiazalv.billger.application.service.BillService;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.BillDTO;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.BillsGroupedByDateDTO;
-import com.github.crisdiazalv.billger.infrastructure.rest.dto.category.CategoryWithBillsDTO;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.NewBillDTO;
+import com.github.crisdiazalv.billger.infrastructure.rest.dto.category.CategoryWithBillsDTO;
 import com.github.crisdiazalv.billger.infrastructure.rest.mapper.BillMapper;
 import com.github.crisdiazalv.billger.infrastructure.rest.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +44,8 @@ public class BillController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BillDTO>> findAll(@RequestParam(value = "account") long accountId) {
-        List<BillDTO> bills = mapper.toDTOList(service.findAll(accountId));
+    public ResponseEntity<List<BillDTO>> findAll(@RequestParam(value = "account") long account) {
+        List<BillDTO> bills = mapper.toDTOList(service.findAll(account));
         return ResponseEntity.ok(bills);
     }
 
@@ -59,9 +59,9 @@ public class BillController {
     }
 
     @GetMapping("/group/category")
-    public ResponseEntity<List<CategoryWithBillsDTO>> findAllGroupedByCategory() {
+    public ResponseEntity<List<CategoryWithBillsDTO>> findGroupedByCategory(@RequestParam(value = "account") long account) {
         List<CategoryWithBillsDTO> groupedBills = new ArrayList<>();
-        for (Map.Entry<Category, List<Bill>> gb : service.findAllGroupedByCategory().entrySet()) {
+        for (Map.Entry<Category, List<Bill>> gb : service.findGroupedByCategory(account).entrySet()) {
             long sum = gb.getValue().stream().map(Bill::getAmount).mapToLong(Long::valueOf).sum();
             groupedBills.add(new CategoryWithBillsDTO(categoryMapper.toCategoryDTO(gb.getKey()), mapper.toDTOList(gb.getValue()), sum));
         }
