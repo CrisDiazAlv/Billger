@@ -2,7 +2,7 @@ package com.github.crisdiazalv.billger.interfaces.rest.controller;
 
 import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.model.Category;
-import com.github.crisdiazalv.billger.infrastructure.service.BillService;
+import com.github.crisdiazalv.billger.application.service.BillService;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.BillDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.BillsGroupedByDateDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.category.CategoryWithBillsDTO;

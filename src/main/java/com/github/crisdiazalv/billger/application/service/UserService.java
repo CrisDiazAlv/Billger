@@ -1,4 +1,4 @@
-package com.github.crisdiazalv.billger.infrastructure.service;
+package com.github.crisdiazalv.billger.application.service;
 
 import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import com.github.crisdiazalv.billger.domain.model.User;

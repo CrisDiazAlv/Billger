@@ -1,6 +1,6 @@
 package com.github.crisdiazalv.billger.interfaces.rest.controller;
 
-import com.github.crisdiazalv.billger.infrastructure.service.UserService;
+import com.github.crisdiazalv.billger.application.service.UserService;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.user.NewUserDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.dto.user.UserDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.mapper.UserMapper;
