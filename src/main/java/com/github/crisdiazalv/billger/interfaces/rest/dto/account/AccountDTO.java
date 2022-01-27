@@ -1,5 +1,6 @@
-package com.github.crisdiazalv.billger.interfaces.rest.dto;
+package com.github.crisdiazalv.billger.interfaces.rest.dto.account;
 
+import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.BillDTO;
 import lombok.Data;
 
 import java.time.LocalDateTime;

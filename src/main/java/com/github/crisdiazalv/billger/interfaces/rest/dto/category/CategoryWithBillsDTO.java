@@ -1,5 +1,6 @@
-package com.github.crisdiazalv.billger.interfaces.rest.dto;
+package com.github.crisdiazalv.billger.interfaces.rest.dto.category;
 
+import com.github.crisdiazalv.billger.interfaces.rest.dto.bill.BillDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

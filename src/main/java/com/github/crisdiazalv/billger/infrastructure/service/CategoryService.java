@@ -17,13 +17,13 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryService implements CategoryService {
 
     private final CategoryRepository repository;
     private final UserRepository userRepository;
 
     @Autowired
-    public CategoryServiceImpl(CategoryRepository repository, UserRepository userRepository) {
+    public CategoryService(CategoryRepository repository, UserRepository userRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
     }

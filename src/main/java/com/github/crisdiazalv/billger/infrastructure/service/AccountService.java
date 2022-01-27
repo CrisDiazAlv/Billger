@@ -18,13 +18,13 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class AccountServiceImpl implements AccountService {
+public class AccountService implements AccountService {
 
     private final AccountRepository repository;
     private final UserRepository userRepository;
 
     @Autowired
-    public AccountServiceImpl(AccountRepository repository, UserRepository userRepository) {
+    public AccountService(AccountRepository repository, UserRepository userRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
     }

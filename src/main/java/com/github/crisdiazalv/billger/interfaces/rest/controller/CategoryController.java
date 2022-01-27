@@ -1,7 +1,7 @@
-package com.github.crisdiazalv.billger.interfaces.rest;
+package com.github.crisdiazalv.billger.interfaces.rest.controller;
 
-import com.github.crisdiazalv.billger.domain.service.CategoryService;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.CategoryDTO;
+import com.github.crisdiazalv.billger.infrastructure.service.CategoryService;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.category.CategoryDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

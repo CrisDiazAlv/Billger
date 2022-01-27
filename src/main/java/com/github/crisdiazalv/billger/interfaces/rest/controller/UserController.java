@@ -1,8 +1,8 @@
-package com.github.crisdiazalv.billger.interfaces.rest;
+package com.github.crisdiazalv.billger.interfaces.rest.controller;
 
-import com.github.crisdiazalv.billger.domain.service.UserService;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.NewUserDTO;
-import com.github.crisdiazalv.billger.interfaces.rest.dto.UserDTO;
+import com.github.crisdiazalv.billger.infrastructure.service.UserService;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.user.NewUserDTO;
+import com.github.crisdiazalv.billger.interfaces.rest.dto.user.UserDTO;
 import com.github.crisdiazalv.billger.interfaces.rest.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

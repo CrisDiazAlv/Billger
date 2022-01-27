@@ -1,19 +1,21 @@
-package com.github.crisdiazalv.billger.interfaces.rest.dto;
+package com.github.crisdiazalv.billger.interfaces.rest.dto.bill;
 
+import com.github.crisdiazalv.billger.interfaces.rest.dto.category.CategoryDTO;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class NewBillDTO {
+public class BillDTO {
 
+    private long id;
     private long amount;
     private LocalDateTime date;
     private boolean paid;
     private LocalDateTime estimatedDate;
     private String description;
     private String notes;
-    private long category;
+    private CategoryDTO category;
     private long account;
 
 }

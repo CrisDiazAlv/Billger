@@ -24,13 +24,13 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class BillServiceImpl implements BillService {
+public class BillService implements BillService {
 
     private final BillRepository repository;
     private final UserRepository userRepository;
 
     @Autowired
-    public BillServiceImpl(BillRepository repository, UserRepository userRepository) {
+    public BillService(BillRepository repository, UserRepository userRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
     }
