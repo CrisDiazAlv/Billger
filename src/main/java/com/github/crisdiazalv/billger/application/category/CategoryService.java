@@ -1,4 +1,4 @@
-package com.github.crisdiazalv.billger.application.service;
+package com.github.crisdiazalv.billger.application.category;
 
 import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import com.github.crisdiazalv.billger.domain.model.Category;

@@ -1,6 +1,6 @@
 package com.github.crisdiazalv.billger.infrastructure.rest.controller;
 
-import com.github.crisdiazalv.billger.application.service.BillService;
+import com.github.crisdiazalv.billger.application.bill.BillService;
 import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.model.Category;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.BillDTO;

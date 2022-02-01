@@ -1,6 +1,6 @@
 package com.github.crisdiazalv.billger.infrastructure.rest.controller;
 
-import com.github.crisdiazalv.billger.application.service.CategoryService;
+import com.github.crisdiazalv.billger.application.category.CategoryService;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.category.CategoryDTO;
 import com.github.crisdiazalv.billger.infrastructure.rest.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;

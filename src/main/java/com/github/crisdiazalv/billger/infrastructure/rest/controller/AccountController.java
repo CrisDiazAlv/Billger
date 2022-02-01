@@ -1,6 +1,6 @@
 package com.github.crisdiazalv.billger.infrastructure.rest.controller;
 
-import com.github.crisdiazalv.billger.application.service.AccountService;
+import com.github.crisdiazalv.billger.application.account.AccountService;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.account.AccountDTO;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.account.NewAccountDTO;
 import com.github.crisdiazalv.billger.infrastructure.rest.mapper.AccountMapper;
