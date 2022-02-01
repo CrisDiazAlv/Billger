@@ -3,7 +3,7 @@ package com.github.crisdiazalv.billger.application.user;
 import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import com.github.crisdiazalv.billger.domain.model.User;
 import com.github.crisdiazalv.billger.domain.model.UserPrincipal;
-import com.github.crisdiazalv.billger.infrastructure.repository.UserRepository;
+import com.github.crisdiazalv.billger.domain.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

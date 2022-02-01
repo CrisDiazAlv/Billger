@@ -2,7 +2,7 @@ package com.github.crisdiazalv.billger.application.user;
 
 import com.github.crisdiazalv.billger.domain.exception.NotFoundException;
 import com.github.crisdiazalv.billger.domain.model.User;
-import com.github.crisdiazalv.billger.infrastructure.repository.UserRepository;
+import com.github.crisdiazalv.billger.domain.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

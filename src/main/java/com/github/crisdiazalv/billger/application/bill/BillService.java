@@ -6,17 +6,15 @@ import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.model.Category;
 import com.github.crisdiazalv.billger.domain.model.User;
 import com.github.crisdiazalv.billger.domain.model.UserPrincipal;
-import com.github.crisdiazalv.billger.infrastructure.repository.BillRepository;
-import com.github.crisdiazalv.billger.infrastructure.repository.UserRepository;
+import com.github.crisdiazalv.billger.domain.repository.BillRepository;
+import com.github.crisdiazalv.billger.domain.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,22 +35,8 @@ public class BillService {
     @Transactional(readOnly = true)
     public List<Bill> findAll(long accountId) {
         User user = findUser();
-        Account account = findAccountOrThrow(accountId, user.getAccounts());
-        List<Specification<Bill>> specifications = new ArrayList<>();
-        specifications.add(equals("account", account));
-        Specification<Bill> specification = null;
-        for (Specification<Bill> s : specifications) {
-            if (specification == null) {
-                specification = Specification.where(s);
-            } else {
-                specification.and(s);
-            }
-        }
-        return repository.findAll(specification);
-    }
-
-    private Specification<Bill> equals(String field, Object id) {
-        return (root, query, cb) -> cb.equal(root.get(field), id);
+        findAccountOrThrow(accountId, user.getAccounts());
+        return repository.findAll(accountId);
     }
 
     @Transactional(readOnly = true)
