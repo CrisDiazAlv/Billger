@@ -15,6 +15,7 @@ public class AccountDTO {
     private String name;
     private String accountNumber;
     private LocalDateTime creationDate;
+    private String color;
     private List<BillDTO> bills;
 
 }

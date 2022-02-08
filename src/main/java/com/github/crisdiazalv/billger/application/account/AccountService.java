@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Service
@@ -21,6 +22,8 @@ public class AccountService {
 
     private final AccountRepository repository;
     private final UserRepository userRepository;
+
+    private Random random = new Random();
 
     @Autowired
     public AccountService(AccountRepository repository, UserRepository userRepository) {
@@ -55,6 +58,8 @@ public class AccountService {
         User user = getUser();
         account.setUser(user);
         account.setCreationDate(LocalDateTime.now());
+        List<String> colors = List.of("#2b6777", "#5f2c3e", /*"#f2f2f2",*/ "#52ab98", /*"#f5cac2",*/ "#6db785", "#ef9273", "#de5499");
+        account.setColor(colors.get(random.nextInt(colors.size())));
         log.info("Saving new account: {}", account);
         repository.save(account);
     }

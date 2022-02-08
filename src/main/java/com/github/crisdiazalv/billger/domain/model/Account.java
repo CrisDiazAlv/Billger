@@ -25,6 +25,7 @@ public class Account {
 
     private String name;
     private String accountNumber;
+    private String color;
     private LocalDateTime creationDate;
 
     @ToString.Exclude
