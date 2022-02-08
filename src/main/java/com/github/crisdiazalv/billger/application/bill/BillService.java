@@ -51,13 +51,6 @@ public class BillService {
     }
 
     @Transactional(readOnly = true)
-    public Map<LocalDate, List<Bill>> findAllGroupedByDate(Long category) {
-        List<Bill> bills = repository.findAll();
-        // coger todas las facturas y agruparlas por fecha
-        return bills.stream().collect(Collectors.groupingBy(bill -> bill.getDate().toLocalDate()));
-    }
-
-    @Transactional(readOnly = true)
     public Map<Category, List<Bill>> findGroupedByCategory(long account) {
         User user = findUser();
         List<Bill> bills = user.getAccounts()

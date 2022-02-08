@@ -49,15 +49,6 @@ public class BillController {
         return ResponseEntity.ok(bills);
     }
 
-    @GetMapping("/groupedByDate")
-    public ResponseEntity<List<BillsGroupedByDateDTO>> findAllGroupedByDate(@RequestParam(value = "category", required = false) Long category) {
-        List<BillsGroupedByDateDTO> groupedBills = new ArrayList<>();
-        for (Map.Entry<LocalDate, List<Bill>> gb : service.findAllGroupedByDate(category).entrySet()) {
-            groupedBills.add(new BillsGroupedByDateDTO(gb.getKey(), mapper.toDTOList(gb.getValue())));
-        }
-        return ResponseEntity.ok(groupedBills);
-    }
-
     @GetMapping("/group/category")
     public ResponseEntity<List<CategoryWithBillsDTO>> findGroupedByCategory(@RequestParam(value = "account") long account) {
         List<CategoryWithBillsDTO> groupedBills = new ArrayList<>();
