@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -57,6 +57,7 @@ public class BillService {
                 .stream()
                 .filter(a -> a.getId() == account)
                 .flatMap(a -> a.getBills().stream())
+                .sorted(Comparator.comparing(Bill::getDate))
                 .toList();
         return bills.stream()
                 .collect(Collectors.groupingBy(Bill::getCategory));
