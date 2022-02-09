@@ -82,8 +82,10 @@ public class BillService {
     public void deleteById(long id) {
         Bill bill = findById(id);
         log.info("Deleting bill '{}'", bill.getDescription());
+        Account account = bill.getAccount();
+        account.setCurrentBalance(account.getCurrentBalance() - bill.getAmount());
         // first, remove it from the account
-        bill.getAccount().getBills().remove(bill);
+        account.getBills().remove(bill);
         // delete it
         repository.deleteById(id);
     }
