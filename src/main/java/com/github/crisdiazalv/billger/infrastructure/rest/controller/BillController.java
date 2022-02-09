@@ -4,7 +4,6 @@ import com.github.crisdiazalv.billger.application.bill.BillService;
 import com.github.crisdiazalv.billger.domain.model.Bill;
 import com.github.crisdiazalv.billger.domain.model.Category;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.BillDTO;
-import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.BillsGroupedByDateDTO;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.bill.NewBillDTO;
 import com.github.crisdiazalv.billger.infrastructure.rest.dto.category.CategoryWithBillsDTO;
 import com.github.crisdiazalv.billger.infrastructure.rest.mapper.BillMapper;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
