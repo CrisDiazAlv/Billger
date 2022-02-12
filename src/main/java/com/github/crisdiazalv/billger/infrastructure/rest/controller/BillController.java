@@ -51,7 +51,7 @@ public class BillController {
     public ResponseEntity<List<CategoryWithBillsDTO>> findGroupedByCategory(@RequestParam(value = "account") long account) {
         List<CategoryWithBillsDTO> groupedBills = new ArrayList<>();
         for (Map.Entry<Category, List<Bill>> gb : service.findGroupedByCategory(account).entrySet()) {
-            long sum = gb.getValue().stream().map(Bill::getAmount).mapToLong(Long::valueOf).sum();
+            double sum = gb.getValue().stream().map(Bill::getAmount).mapToDouble(Double::valueOf).sum();
             groupedBills.add(new CategoryWithBillsDTO(categoryMapper.toCategoryDTO(gb.getKey()), mapper.toDTOList(gb.getValue()), sum));
         }
         return ResponseEntity.ok(groupedBills);

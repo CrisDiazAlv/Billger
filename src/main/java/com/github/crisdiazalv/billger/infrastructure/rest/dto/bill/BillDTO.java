@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class BillDTO {
 
     private long id;
-    private long amount;
+    private double amount;
     private LocalDateTime date;
     private boolean paid;
     private LocalDateTime estimatedDate;

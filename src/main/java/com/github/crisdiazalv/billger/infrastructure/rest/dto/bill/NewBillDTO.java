@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 public class NewBillDTO {
 
-    private long amount;
+    private double amount;
     private LocalDateTime date;
     private boolean paid;
     private LocalDateTime estimatedDate;

@@ -20,8 +20,8 @@ public class Account {
     @Id
     @GeneratedValue
     private long id;
-    private long currentBalance;
-    private long estimatedBalance;
+    private double currentBalance;
+    private double estimatedBalance;
 
     private String name;
     private String accountNumber;

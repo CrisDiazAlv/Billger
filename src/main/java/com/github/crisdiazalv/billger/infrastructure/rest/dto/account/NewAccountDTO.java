@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class NewAccountDTO {
 
-    private long initialBalance;
+    private double initialBalance;
     private String name;
     private String accountNumber;
 

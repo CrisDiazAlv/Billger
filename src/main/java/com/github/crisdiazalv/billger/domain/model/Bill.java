@@ -18,7 +18,7 @@ public class Bill {
     @Id
     @GeneratedValue
     private long id;
-    private long amount;
+    private double amount;
     private LocalDateTime date;
     private boolean paid;
     private LocalDateTime estimatedDate;
