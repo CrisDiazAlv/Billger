@@ -15,9 +15,6 @@ public interface BillMapper {
     BillDTO toBillDTO(Bill bill);
 
     @Mapping(source = "account", target = "account.id")
-    Bill toBill(BillDTO billDTO);
-
-    @Mapping(source = "account", target = "account.id")
     @Mapping(source = "category", target = "category.id")
     Bill toBill(NewBillDTO newBillDTO);
 
